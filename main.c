@@ -1,4 +1,4 @@
-#define BUILD_TARGET WINDOWS
+#define BUILD_TARGET C64
 #include "Terminator.h"
 
 #if BUILD_TARGET == C64
@@ -48,7 +48,7 @@ void title_case(char *str) {
 			else if (str[f] == 'w') str[f] = 'W';
 			else if (str[f] == 'x') str[f] = 'X';
 			else if (str[f] == 'y') str[f] = 'Y';
-			else str[f] = 'Z';
+			else if (str[f] == 'z') str[f] = 'Z';
 		}
 	}
 }
