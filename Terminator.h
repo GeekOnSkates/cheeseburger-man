@@ -2,6 +2,9 @@
 #define _TERMINATOR_H
 
 #include <stdio.h>
+#if BUILD_TARGET == WINDOWS
+#include <stdarg.h>
+#endif
 
 #define VIC20		0
 #define C64			1
@@ -252,6 +255,7 @@ void clear() {
 	FillConsoleOutputCharacterA(
 		console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written
 	);
+	SetConsoleCursorPosition(console, topLeft);
 }
 void startup() {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;

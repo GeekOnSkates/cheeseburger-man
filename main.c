@@ -1,4 +1,4 @@
-#define BUILD_TARGET C64
+#define BUILD_TARGET WINDOWS
 #include "Terminator.h"
 
 #if BUILD_TARGET == C64
@@ -22,7 +22,7 @@ char verb1[20]; char f;
 
 void title_case(char *str) {
 	for (f=0; f<20; f++) {
-		if (f == 0 || str[f - 1] == ' ') {
+		if (f == 0 || str[f - 1] == ' ' || str[f - 1] == '-') {
 			if (str[f] == 'a') str[f] = 'A';
 			else if (str[f] == 'b') str[f] = 'B';
 			else if (str[f] == 'c') str[f] = 'C';
@@ -55,26 +55,6 @@ void title_case(char *str) {
 
 void tell_story() {
 	clear();
-	#if BUILD_TARGET == C64
-		/*
-		// Setup - see around page 9 of https://www.commodore.ca/manuals/c64_users_guide/c64-users_guide-07-creating_sound.pdf
-		// Clearly, this was designed for coders who are also DJs, or professional sound engineers or expert audio ninja or something :D
-		// Kinda makes me want to go back to the VIC-20 for a bit.
-		for (f = 0; f < 24; f++)
-			POKE(54272L + f, 0);
-		POKE(54296L, 15);	// volume = max
-		POKE(54276L, 65);	// voice 1 start sawtooth
-		POKE(54277L, 64);	// voice 1 medium attack no decay
-		POKE(54278L, 128);	// voice 1 high sustain 
-		
-		// Shooting at plapying a "simple" C note (simple for seasoned pros and Ultimate Audio Gurus; apparently not for us mere mortals). :P
-		POKE(54273L, 34);
-		POKE(54272L, 75);
-		for (f = 0; f<100; f++);
-		POKE(54272L, 0);
-		POKE(54273L, 0);
-		*/
-	#endif
 	text_color(YELLOW);
 	title_case(noun1); title_case(name);
 	printf("Introducing %s-%s!\n\n", noun1, name);
@@ -84,11 +64,11 @@ void tell_story() {
 	printf("This %s crime fighter can %s\n", adj2, verb1);
 	printf("faster than the speed of light,\nhas a super-%s, and can lift\n", noun4);
 	printf("%s %s without breaking a sweat.\n\n", adj3, noun5);
-	#if BUILD_TARGET == C64
-		printf("\nPress RETURN to go to the next page.");
-		get_char();
-		clear();
-	#endif
+	
+	printf("Press %s to go to the next page.", ENTER);
+	get_char();
+	clear();
+	
 	printf("Yes, %s-%s is a", noun1, name);
 	if (adj1[0] == 'a' || adj1[0] == 'e' || adj1[0] == 'i' || adj1[0] == 'o' || adj1[0] == 'u')
 		printf("n");
@@ -111,6 +91,28 @@ void tell_story() {
 
 void start_game() {
 	clear();
+	
+	for (f=0; f<20; f++) {
+		noun1[f] = 0;
+		noun2[f] = 0;
+		noun3[f] = 0;
+		noun4[f] = 0;
+		noun5[f] = 0;
+		noun6[f] = 0;
+		noun7[f] = 0;
+		noun8[f] = 0;
+		noun9[f] = 0;
+		name[f] = 0;
+		job[f] = 0;
+		verb1[f] = 0;
+		adj1[f] = 0;
+		adj2[f] = 0;
+		adj3[f] = 0;
+		adj4[f] = 0;
+		adj5[f] = 0;
+		adj6[f] = 0;
+		adj7[f] = 0;
+	}
 	
 	text_color(YELLOW);
 	printf("\nEnter a noun (person/place/thing):\n\n    ");
@@ -221,16 +223,41 @@ int main() {
 	clear();
 	
 	#if BUILD_TARGET == C64
-		POKE(53280L, YELLOW);
+		POKE(53280L, 9);
 		printf("\n");
 	#endif
+	
+	#if BUILD_TARGET == C64
+		// Setup - see around page 9 of https://www.commodore.ca/manuals/c64_users_guide/c64-users_guide-07-creating_sound.pdf
+		// Clearly, this was designed for coders who are also DJs, or professional sound engineers or expert audio ninja or something :D
+		// Kinda makes me want to go back to the VIC-20 for a bit.
+		for (f = 0; f < 24; f++)
+			POKE(54272L + f, 0);
+		//POKE(54274L, 8);	// see my question on Everything C64
+		POKE(54275L, 15);	// see my question on Everything C64
+		POKE(54296L, 15);	// volume = max
+		POKE(54276L, 65);	// voice 1 start square wave
+		POKE(54277L, 64);	// voice 1 medium attack no decay
+		POKE(54278L, 128);	// voice 1 high sustain 
+		
+		// Shooting at plapying a "simple" C note (simple for seasoned pros and Ultimate Audio Gurus; apparently not for us mere mortals). :P
+		POKE(54273L, 34);
+		POKE(54272L, 75);
+		for (f = 0; f<100; f++);
+		POKE(54272L, 0);
+		POKE(54273L, 0);
+	#endif
+	
 	text_color(YELLOW);
-	center(18, "CHEESEBURGER MAN");
+	center(18, "CHEESEBURGER-MAN");
 	text_color(WHITE);
 	printf("\nThis is a game designed to be goofy.\n");
 	printf("It will ask you for a bunch of words.\n");
 	printf("Type whatever you want and press %s.\n", ENTER);
 	printf("Once the game has all the info it needs,");
+	#if BUILD_TARGET != C64
+		printf("\n");
+	#endif
 	printf("it will turn the info into a story.\n");
 	printf("You win if your story is really funny!\n\n\n");
 	printf("Press %s to start the game.  ", ENTER);
