@@ -1,13 +1,14 @@
-let noun1 = ""; let noun2 = "";
-let noun3 = ""; let noun4 = "";
-let noun5 = ""; let noun6 = "";
-let noun7 = ""; let noun8 = "";
-let noun9 = ""; let name = "";
-let job = ""; let adj1 = "";
-let adj2 = ""; let adj3 = "";
-let adj4 = ""; let adj5 = "";
-let adj6 = ""; let adj7 = "";
-let verb1 = ""; let f = 0;
+let data = {};
+data.noun1 = ""; data.noun2 = "";
+data.noun3 = ""; data.noun4 = "";
+data.noun5 = ""; data.noun6 = "";
+data.noun7 = ""; data.noun8 = "";
+data.noun9 = ""; data.name = "";
+data.job = ""; data.adj1 = "";
+data.adj2 = ""; data.adj3 = "";
+data.adj4 = ""; data.adj5 = "";
+data.adj6 = ""; data.adj7 = "";
+data.verb1 = "";
 
 function title_case(str) {
     let s = "";
@@ -18,187 +19,87 @@ function title_case(str) {
     return s;
 }
 
-void tell_story() {
-    let hero = title_case(noun1) + "-" + title_case(name);
-    let html = "<h1>Introducing " + hero + "</h1>";
-        + "<p>Mild-mannered " + job + " by day, " + adj1 + " super-hero by night, "
-	    + hero + " stands for truth, " + noun2 + ", and the American " + noun3 + "!  "
-	    + "This " + adj2 + " crime fighter can " + verb1 + " "
-	    + "faster than the speed of light, has a super-" + noun4 + ", and can lift "
-	    + adj3 + " " + noun5 + " without breaking a sweat.</p>"
+function add_field(label, variable) {
+	let l = document.createElement("label");
+	let i = document.createElement("input");
+	l.appendChild(document.createTextNode(label));
+	l.appendChild(i);
+	i.onchange = function(e) { data[variable] = e.target.value; };
+	document.body.appendChild(l);
+}
+
+function tell_story() {
+    let hero = title_case(data.noun1) + "-" + title_case(data.name);
+    let html = "<h1>Introducing " + hero + "</h1>"
+        + "<p>Mild-mannered " + data.job + " by day, " + data.adj1 + " super-hero by night, "
+	    + hero + " stands for truth, " + data.noun2 + ", and the American " + data.noun3 + "!  "
+	    + "This " + data.adj2 + " crime fighter can " + data.verb1 + " "
+	    + "faster than the speed of light, has a super-" + data.noun4 + ", and can lift "
+	    + data.adj3 + " " + data.noun5 + " without breaking a sweat.</p><p>"
 		+ "Yes, " + hero + " is a ";
-	if (adj1[0] == 'a' || adj1[0] == 'e' || adj1[0] == 'i' || adj1[0] == 'o' || adj1[0] == 'u')
+	if (data.adj1[0] == 'a' || data.adj1[0] == 'e' || data.adj1[0] == 'i' || data.adj1[0] == 'o' || data.adj1[0] == 'u')
 		html += "n";
-    html += adj1 + " hero, "
-	    + "Fighting crime, saving " + noun2 + " from burning " + noun6 + " ";
-	    + "and stopping villains' " + adj4 + " plots!  ";
-	adj5 = title_case(adj5);
-	    + "Vilains like the evil Dr. " + adj5 + ", "
-	    + "who built a giant robotic " + noun7 + ", "
-	adj7 = title_case(adj7); noun9 = title_case(noun9);
-	html += "or the " + adj7 + " " + noun9 + ", whose army of ninja "
-	    + noun8 + " almost conquered the world!</p><p>"
+    html += data.adj1 + " hero, "
+	    + "fighting crime, saving " + data.noun2 + " from burning " + data.noun6 + " "
+	    + "and stopping villains' " + data.adj4 + " plots!  ";
+	data.adj5 = title_case(data.adj5);
+	html += "Vilains like the evil Dr. " + data.adj5 + ", "
+	    + "who built a giant robotic " + data.noun7 + ", "
+	data.adj7 = title_case(data.adj7); data.noun9 = title_case(data.noun9);
+	html += "or the " + data.adj7 + " " + data.noun9 + ", whose army of ninja "
+	    + data.noun8 + " almost conquered the world!</p><p>"
 	    + "Step aside, Superman!<br />Stand by, Spider-Man,<br />"
-	    + "here comes " + hero + "to save the day!</p>"
+	    + "Here comes " + hero + " to save the day!</p>"
         + "<button onclick='start_game();'>Play Again</button>"
     document.body.innerHTML = html;
 }
 
-void start_game() {
+function start_game() {
+	data = {};
+	data.noun1 = ""; data.noun2 = "";
+	data.noun3 = ""; data.noun4 = "";
+	data.noun5 = ""; data.noun6 = "";
+	data.noun7 = ""; data.noun8 = "";
+	data.noun9 = ""; data.name = "";
+	data.job = ""; data.adj1 = "";
+	data.adj2 = ""; data.adj3 = "";
+	data.adj4 = ""; data.adj5 = "";
+	data.adj6 = ""; data.adj7 = "";
+	data.verb1 = "";
 	document.body.innerHTML = "";
-    
-    // LEFT OFF HERE
-
-	text_color(YELLOW);
-	printf("\nEnter a noun (person/place/thing):\n\n    ");
-	text_color(WHITE);
-	get_string(noun9, 20);
-	
-	text_color(YELLOW);
-	printf("\nEnter another noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun3, 20);
-	
-	text_color(YELLOW);
-	printf("\nAnd another noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun4, 20);
-	
-	text_color(YELLOW);
-	printf("\nEnter another noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun1, 20);
-	
-	text_color(YELLOW);
-	printf("\nOne more noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun7, 20);
-	
-	text_color(YELLOW);
-	printf("\nNow enter a plural noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun2, 20);
-	
-	document.body.innerHTML = "";
-	
-	text_color(YELLOW);
-	printf("\nGimme another plural noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun5, 20);
-	
-	text_color(YELLOW);
-	printf("\nAnd another plural noun:\n\n    ");
-	text_color(WHITE);
-	get_string(noun8, 20);
-	
-	text_color(YELLOW);
-	printf("\nLast plural noun, I promise:\n\n    ");
-	text_color(WHITE);
-	get_string(noun6, 20);
-	
-	text_color(YELLOW);
-	printf("\nMan, woman, boy, girl, or an animal?\n\n    ");
-	text_color(WHITE);
-	get_string(name, 20);
-	
-	text_color(YELLOW);
-	printf("\nEnter a job (lawyer, plumber, etc.):\n\n    ");
-	text_color(WHITE);
-	get_string(job, 20);
-	
-	document.body.innerHTML = "";
-	
-	text_color(YELLOW);
-	printf("\nAdjective (describing word):\n\n    ");
-	text_color(WHITE);
-	get_string(adj1, 20);
-	
-	text_color(YELLOW);
-	printf("\nEnter another adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj2, 20);
-	
-	text_color(YELLOW);
-	printf("\nAnd another adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj3, 20);
-	
-	text_color(YELLOW);
-	printf("\nGimme another adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj4, 20);
-	
-	text_color(YELLOW);
-	printf("\nAnd another adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj6, 20);
-	
-	document.body.innerHTML = "";
-	
-	text_color(YELLOW);
-	printf("\nOne more adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj5, 20);
-	
-	text_color(YELLOW);
-	printf("\nOkay, last adjective:\n\n    ");
-	text_color(WHITE);
-	get_string(adj7, 20);
-	
-	text_color(YELLOW);
-	printf("\nVerb (action word):\n\n    ");
-	text_color(WHITE);
-	get_string(verb1, 20);
-	
-	tell_story();
+	add_field("Enter a noun (person/place/thing):", "noun9");
+	add_field("Enter another noun:", "noun3");
+	add_field("And another noun:", "noun4");
+	add_field("Enter another noun:", "noun1");
+	add_field("One more noun:", "noun7");
+	add_field("Now enter a plural noun:", "noun2");
+	add_field("Gimme another plural noun:", "noun5");
+	add_field("And another plural noun:", "noun8");
+	add_field("Last plural noun, I promise:", "noun6");
+	add_field("Man, woman, boy, girl, or an animal?", "name");
+	add_field("Enter a job (lawyer, plumber, etc.):", "job");
+	add_field("Adjective (describing word):", "adj1");
+	add_field("Enter another adjective:", "adj2");
+	add_field("And another adjective:", "adj3");
+	add_field("Gimme another adjective:", "adj4");
+	add_field("And another adjective:", "adj6");
+	add_field("One more adjective:", "adj5");
+	add_field("Okay, last adjective:", "adj7");
+	add_field("Verb (action word):", "verb1");
+	let b = document.createElement("button");
+	b.onclick = tell_story;
+	b.innerText = "Go";
+	document.body.appendChild(b);
+	document.querySelectorAll("input")[0].focus();
 }
 
-int main() {
-	startup();
-	document.body.innerHTML = "";
-	
-	#if BUILD_TARGET == C64
-		POKE(53280L, 9);
-		printf("\n");
-	#endif
-	
-	#if BUILD_TARGET == C64
-		// Setup - see around page 9 of https://www.commodore.ca/manuals/c64_users_guide/c64-users_guide-07-creating_sound.pdf
-		// Clearly, this was designed for coders who are also DJs, or professional sound engineers or expert audio ninja or something :D
-		// Kinda makes me want to go back to the VIC-20 for a bit.
-		for (f = 0; f < 24; f++)
-			POKE(54272L + f, 0);
-		//POKE(54274L, 8);	// see my question on Everything C64
-		POKE(54275L, 15);	// see my question on Everything C64
-		POKE(54296L, 15);	// volume = max
-		POKE(54276L, 65);	// voice 1 start square wave
-		POKE(54277L, 64);	// voice 1 medium attack no decay
-		POKE(54278L, 128);	// voice 1 high sustain 
-		
-		// Shooting at plapying a "simple" C note (simple for seasoned pros and Ultimate Audio Gurus; apparently not for us mere mortals). :P
-		POKE(54273L, 34);
-		POKE(54272L, 75);
-		for (f = 0; f<100; f++);
-		POKE(54272L, 0);
-		POKE(54273L, 0);
-	#endif
-	
-	text_color(YELLOW);
-	center(18, "CHEESEBURGER-MAN");
-	text_color(WHITE);
-	printf("\nThis is a game designed to be goofy.\n");
-	printf("It will ask you for a bunch of words.\n");
-	printf("Type whatever you want and press %s.\n", ENTER);
-	printf("Once the game has all the info it needs,");
-	#if BUILD_TARGET != C64
-		printf("\n");
-	#endif
-	printf("it will turn the info into a story.\n");
-	printf("You win if your story is really funny!\n\n\n");
-	printf("Press %s to start the game.  ", ENTER);
-	get_let();
-	start_game();
-	document.body.innerHTML = "";
-	done();
-	return 0;
+function main() {
+	document.body.innerHTML = "<h1>CHEESEBURGER-MAN</h1>"
+		+ "<p>This is a game designed to be goofy.  "
+		+ "It will ask you for a bunch of words.  "
+		+ "Fill out the form then press the Go button.  "
+		+ "Once the game has all the info it needs,"
+		+ "it will turn the info into a story.  You win if your story is really funny!</p>"
+		+ "<button onclick='start_game();'>Start Game</button>";
+	document.querySelector("button").focus();
 }
