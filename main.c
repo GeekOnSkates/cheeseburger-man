@@ -1,4 +1,4 @@
-#define BUILD_TARGET C64
+#define BUILD_TARGET LINUX
 #include "Terminator.h"
 
 #if BUILD_TARGET == C64
